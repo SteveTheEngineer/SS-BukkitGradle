@@ -31,4 +31,5 @@ dependencies {
 pluginBundle {
     website = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
     vcsUrl = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
+    tags.add("bukkit")
 }
