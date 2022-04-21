@@ -38,6 +38,8 @@ publishing {
     }
     publications {
         create<MavenPublication>("gpr") {
+            artifactId = "bukkitgradle"
+
             from(components.getByName("java"))
         }
     }
