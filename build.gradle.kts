@@ -41,8 +41,6 @@ publishing {
     }
     publications {
         create<MavenPublication>("gpr") {
-            artifactId = "kotlin-universal"
-
             from(components.getByName("java"))
         }
     }
