@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
 }
 
-group = "me.ste.stevesseries"
+group = "me.ste.stevesseries.bukkitgradle"
 version = "1.0"
 
 repositories {
@@ -30,19 +30,18 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/SteveTheEngineer/SS-BukkitGradle")
+            name = "SteenePublic"
+            url = uri("https://mvn-public.steenesvc.cf/releases")
 
             credentials {
-                username = (project.findProperty("gpr.user") ?: System.getenv("USERNAME"))?.toString()
-                password = (project.findProperty("gpr.key") ?: System.getenv("TOKEN"))?.toString()
+                username = System.getenv("REPO_USERNAME")
+                password = System.getenv("REPO_PASSWORD")
             }
         }
     }
+    publications {
+        create<MavenPublication>("pluginMaven") {
+            artifactId = "bukkitgradle"
+        }
+    }
 }
-
-//pluginBundle {
-//    website = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
-//    vcsUrl = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
-//    tags = listOf("bukkit")
-//}
