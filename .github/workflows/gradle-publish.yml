@@ -1,6 +1,8 @@
 name: Gradle Plugin
 
-on: [push]
+on:
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -24,7 +26,15 @@ jobs:
         with:
           arguments: build
 
-      - name: Publish to Gradle Plugin Portal
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-        with:
-          arguments: publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }}
+#      - name: Publish to Gradle Plugin Portal
+#        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+#        with:
+#          arguments: publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }}
+
+        - name: Publish to GitHub Packages
+            uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+            with:
+              arguments: publish
+            env:
+              USERNAME: ${{ github.actor }}
+              TOKEN: ${{ secrets.GITHUB_TOKEN }}

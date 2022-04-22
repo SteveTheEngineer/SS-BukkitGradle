@@ -28,8 +28,28 @@ dependencies {
     implementation("org.yaml:snakeyaml:1.30")
 }
 
-pluginBundle {
-    website = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
-    vcsUrl = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
-    tags = listOf("bukkit")
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/SteveTheEngineer/SS-Kotlin")
+            credentials {
+                username = (project.findProperty("gpr.user") ?: System.getenv("USERNAME"))?.toString()
+                password = (project.findProperty("gpr.key") ?: System.getenv("TOKEN"))?.toString()
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("gpr") {
+            artifactId = "kotlin-universal"
+
+            from(components.getByName("java"))
+        }
+    }
 }
+
+//pluginBundle {
+//    website = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
+//    vcsUrl = "https://github.com/SteveTheEngineer/SS-BukkitGradle"
+//    tags = listOf("bukkit")
+//}
