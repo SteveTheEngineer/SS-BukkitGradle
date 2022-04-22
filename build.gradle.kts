@@ -2,11 +2,10 @@ plugins {
     kotlin("jvm") version "1.6.10"
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.18.0"
 }
 
 group = "me.ste.stevesseries"
-version = "1.1"
+version = "1.0"
 
 repositories {
     mavenCentral()
