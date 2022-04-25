@@ -2,8 +2,6 @@ package me.ste.stevesseries.bukkitgradle.extension
 
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.provider.SetProperty
-import java.io.File
 
 abstract class RunServerExtension {
     abstract val workingDirectory: Property<String>
@@ -11,9 +9,13 @@ abstract class RunServerExtension {
     abstract val downloadUri: Property<String>
     abstract val jvmArgs: ListProperty<String>
     abstract val serverArgs: ListProperty<String>
+    abstract val reloadCommand: Property<String>
+    abstract val serverHost: Property<String>
 
     init {
         this.workingDirectory.convention("run")
         this.serverFilename.convention("server.jar")
+        this.reloadCommand.convention("reload confirm")
+        this.serverHost.convention("localhost")
     }
 }

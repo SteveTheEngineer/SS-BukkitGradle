@@ -4,10 +4,7 @@ import me.ste.stevesseries.bukkitgradle.extension.RunServerExtension
 import me.ste.stevesseries.bukkitgradle.extension.commands.PluginCommandsExtension
 import me.ste.stevesseries.bukkitgradle.extension.description.PluginDescriptionExtension
 import me.ste.stevesseries.bukkitgradle.extension.permissions.PluginPermissionsExtension
-import me.ste.stevesseries.bukkitgradle.task.CopyPluginsToServerTask
-import me.ste.stevesseries.bukkitgradle.task.DownloadMinecraftServerTask
-import me.ste.stevesseries.bukkitgradle.task.GeneratePluginDescriptionTask
-import me.ste.stevesseries.bukkitgradle.task.RunMinecraftServerTask
+import me.ste.stevesseries.bukkitgradle.task.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
@@ -40,6 +37,7 @@ class BukkitGradle : Plugin<Project> {
         val generatePluginDescription = tasks.create("generatePluginDescription", GeneratePluginDescriptionTask::class.java, this.pluginDescription, this.pluginCommands, this.pluginPermissions, this.dependOnly, this.softDependOnly, this.loadBeforeOnly)
         val downloadMinecraftServer = tasks.create("downloadMinecraftServer", DownloadMinecraftServerTask::class.java, this.runServerConfig)
         val runMinecraftServer = tasks.create("runMinecraftServer", RunMinecraftServerTask::class.java, this.runServerConfig, downloadMinecraftServer)
+        val reloadServerPlugins = tasks.create("reloadServerPlugins", ReloadServerPluginsTask::class.java, this.runServerConfig)
         val copyPluginsToServer = tasks.create("copyPluginsToServer", CopyPluginsToServerTask::class.java, this.runServerConfig, this.pluginRuntimeOnly)
 
         val processResources = tasks.getByName(JavaPlugin.PROCESS_RESOURCES_TASK_NAME)
@@ -48,10 +46,12 @@ class BukkitGradle : Plugin<Project> {
         processResources.finalizedBy(generatePluginDescription.path)
         runMinecraftServer.dependsOn(downloadMinecraftServer.path, copyPluginsToServer.path)
         copyPluginsToServer.dependsOn(jar.path)
+        reloadServerPlugins.dependsOn(copyPluginsToServer.path)
 
         val runGroup = "run"
-        copyPluginsToServer.group = runGroup
         runMinecraftServer.group = runGroup
+        copyPluginsToServer.group = runGroup
+        reloadServerPlugins.group = runGroup
     }
     
     private fun addExtensions(project: Project) {

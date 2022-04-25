@@ -5,7 +5,7 @@ An example of a plugin can be found [here](https://github.com/SteveTheEngineer/S
 build.gradle.kts:
 ```kotlin
 plugins {
-    id("me.ste.stevesseries.bukkitgradle") version "1.1"
+    id("me.ste.stevesseries.bukkitgradle") version "1.2"
 }
 // ...
 ```

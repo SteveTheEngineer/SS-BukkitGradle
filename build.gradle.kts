@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.6.20"
     `java-gradle-plugin`
     `maven-publish`
 }
 
 group = "me.ste.stevesseries.bukkitgradle"
-version = "1.1"
+version = "1.2"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
@@ -29,6 +29,7 @@ gradlePlugin {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.yaml:snakeyaml:1.30")
+    implementation("com.github.t9t.minecraft-rcon-client:minecraft-rcon-client:1.0.0")
 }
 
 publishing {
