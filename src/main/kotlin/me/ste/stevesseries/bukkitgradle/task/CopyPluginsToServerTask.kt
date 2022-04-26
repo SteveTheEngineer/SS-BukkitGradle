@@ -42,7 +42,7 @@ abstract class CopyPluginsToServerTask @Inject constructor(
     }
 
     private fun getDependencyJars(): Iterable<File> {
-        return PluginUtil.getPlugins(this.logger, this.pluginRuntimeOnly).values
+        return PluginUtil.getPlugins(this.logger, this.pluginRuntimeOnly, true).values
     }
 
     private fun getProjectPluginJar(): File {

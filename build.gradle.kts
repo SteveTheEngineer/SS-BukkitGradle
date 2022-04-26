@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.ste.stevesseries.bukkitgradle"
-version = "1.2"
+version = "1.3"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))

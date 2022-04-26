@@ -8,9 +8,20 @@ import java.io.File
 import java.util.jar.JarFile
 
 object PluginUtil {
-    fun getPlugins(logger: Logger, configuration: Configuration): MutableMap<String, File> {
+    fun getPlugins(logger: Logger, configuration: Configuration, all: Boolean = false): MutableMap<String, File> {
         val plugins = mutableMapOf<String, File>()
-        val files = configuration.resolve()
+        val files = mutableSetOf<File>()
+
+        if (!all) {
+            val resolved = configuration.resolvedConfiguration
+            val firstLevelModules = resolved.firstLevelModuleDependencies
+
+            for (module in firstLevelModules) {
+                files += module.moduleArtifacts.map { it.file }
+            }
+        } else {
+            files += configuration.resolve()
+        }
 
         for (file in files) {
             if (!file.name.endsWith(".jar")) {
