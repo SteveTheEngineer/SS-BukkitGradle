@@ -5,7 +5,7 @@ An example of a plugin can be found [here](https://github.com/SteveTheEngineer/S
 build.gradle.kts:
 ```kotlin
 plugins {
-    id("me.ste.stevesseries.bukkitgradle") version "1.2"
+    id("com.github.SteveTheEngineer.SS-BukkitGradle") version "1.4"
 }
 // ...
 ```
@@ -15,13 +15,13 @@ settings.gradle.kts:
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://mvn-public.steenesvc.cf/releases")
+        maven("https://jitpack.io")
         // ...
     }
 }
 // ...
 ```
-Bukkit Gradle is hosted on Steene Public: https://mvn-public.steenesvc.cf/releases
+[![](https://jitpack.io/v/SteveTheEngineer/SS-BukkitGradle.svg)](https://jitpack.io/#SteveTheEngineer/SS-BukkitGradle)
 
 # TODO
 * Shadow plugin support
