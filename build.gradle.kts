@@ -18,7 +18,7 @@ repositories {
 gradlePlugin {
     plugins {
         create("bukkitGradle") {
-            id = "me.ste.stevesseries.bukkitgradle"
+            id = "com.github.SteveTheEngineer.SS-BukkitGradle"
             displayName = "SS-BukkitGradle"
             description = "A Gradle plugin that facilitates in the development of Bukkit plugins."
             implementationClass = "me.ste.stevesseries.bukkitgradle.BukkitGradle"
@@ -30,23 +30,4 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.yaml:snakeyaml:1.30")
     implementation("com.github.t9t.minecraft-rcon-client:minecraft-rcon-client:1.0.0")
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "SteenePublic"
-            url = uri("https://mvn-public.steenesvc.cf/releases")
-
-            credentials {
-                username = System.getenv("REPO_USERNAME")
-                password = System.getenv("REPO_PASSWORD")
-            }
-        }
-    }
-    publications {
-        create<MavenPublication>("pluginMaven") {
-            artifactId = "bukkitgradle"
-        }
-    }
 }
