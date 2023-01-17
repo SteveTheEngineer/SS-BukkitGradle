@@ -63,9 +63,9 @@ abstract class GeneratePluginDescriptionTask @Inject constructor(
 
     private fun setDependencies(values: MutableMap<String, Any>) {
         // Collect the plugin names
-        val depend = PluginUtil.getPlugins(this.logger, this.dependOnly).keys
-        val softDepend = PluginUtil.getPlugins(this.logger, this.softDependOnly).keys
-        val loadBefore = PluginUtil.getPlugins(this.logger, this.loadBeforeOnly).keys
+        val depend = PluginUtil.getPlugins(this.logger, this.dependOnly).keys.toMutableSet()
+        val softDepend = PluginUtil.getPlugins(this.logger, this.softDependOnly).keys.toMutableSet()
+        val loadBefore = PluginUtil.getPlugins(this.logger, this.loadBeforeOnly).keys.toMutableSet()
 
         // Add additional dependencies
         depend += this.description.additionalDependencies.get()
