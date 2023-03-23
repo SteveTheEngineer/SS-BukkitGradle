@@ -17,5 +17,6 @@ abstract class RunMinecraftServerTask @Inject constructor(
         this.argumentProviders += CommandLineArgumentProvider {
             setOf(this.downloadServer.outputs.files.singleFile.toString()) + this.runServerConfig.serverArgs.get()
         }
+        this.standardInput = System.`in`
     }
 }

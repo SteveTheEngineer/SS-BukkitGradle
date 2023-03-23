@@ -17,5 +17,6 @@ abstract class RunServerExtension {
         this.serverFilename.convention("server.jar")
         this.reloadCommand.convention("reload confirm")
         this.serverHost.convention("localhost")
+        this.serverArgs.convention(listOf("nogui"))
     }
 }

@@ -5,6 +5,10 @@ import me.ste.stevesseries.bukkitgradle.extension.RunServerExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.io.FileFilter
@@ -17,6 +21,10 @@ abstract class CopyPluginsToServerTask @Inject constructor(
     companion object {
         const val PLUGINS_DIRECTORY = "plugins"
     }
+
+    @get:InputFile
+    @get:Optional
+    abstract val projectPluginJar: Property<File>
 
     @TaskAction
     fun exec() {
@@ -46,6 +54,10 @@ abstract class CopyPluginsToServerTask @Inject constructor(
     }
 
     private fun getProjectPluginJar(): File {
+        if (this.projectPluginJar.isPresent) {
+            return this.projectPluginJar.get()
+        }
+
         val jar = this.project.tasks.getByName(JavaPlugin.JAR_TASK_NAME)
         return jar.outputs.files.singleFile
     }

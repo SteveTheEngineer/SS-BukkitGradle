@@ -105,7 +105,7 @@ class BukkitGradle : Plugin<Project> {
         this.loadBeforeOnly.extendsFrom(loadBeforeCompileOnly, loadBeforeRuntimeOnly)
 
         // Plugin runtime only
-        this.pluginRuntimeOnly.extendsFrom(pluginOnly)
+        this.pluginRuntimeOnly.extendsFrom(pluginOnly, dependRuntimeOnly, softDependRuntimeOnly, loadBeforeRuntimeOnly)
 
         // Plugin only
         pluginOnly.extendsFrom(dependCompileOnly, softDependCompileOnly, loadBeforeCompileOnly)
